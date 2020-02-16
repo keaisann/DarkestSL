@@ -109,13 +109,13 @@ cfg.read(os.path.join(os.getcwd(), 'config.ini'))
 p_name = cfg.get('Game', 'program_name')
 p7z_path = cfg.get('Game', 'p7zip_path')
 sv_folder = cfg.get('Game', 'save_folder')
-steam_rg_url = cfg.get('Game', 'steam_rungame_url')
+rg_url = cfg.get('Game', 'rungame_url')
 bak_folder = cfg.get('Game', 'backup_folder')
 
 game = GameSaveMgr(p_name, p7z_path,
                    sv_folder,
                    bak_folder,
-                   steam_rg_url)
+                   rg_url)
 
 try:
     game.sleep_sec = int(cfg.get('Game', 'sleep_sec'))
