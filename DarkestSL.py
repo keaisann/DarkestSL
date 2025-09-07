@@ -1,11 +1,14 @@
 import ctypes
 import base64
+from gc import disable
 import os
 
 from icon import Icon
 from tkinter import (
     BOTH,
+    DISABLED,
     LEFT,
+    NORMAL,
     NW,
     YES,
     BooleanVar,
@@ -27,7 +30,7 @@ class Application(Frame):
         self.pack()
         self.option_restart = BooleanVar()
         self.option_save = BooleanVar()
-        self.file_name = Entry(state="readonly")
+        self.file_name = Entry(state=DISABLED)
         self.create_widget()
 
     def create_widget(self):
@@ -51,13 +54,14 @@ class Application(Frame):
             variable=self.option_save,
         ).pack(side=LEFT)
         fm_down.pack(anchor=NW, padx=5, pady=5, expand=YES, fill=BOTH)
-        self.file_name.pack(padx=5, pady=5, expand=YES, fill=BOTH)
 
     def get_chk(self):
         if self.option_save.get():
-            self.file_name["state"] = "normal"
+            self.file_name["state"] = NORMAL
+            self.file_name.pack(padx=5, pady=5, expand=YES, fill=BOTH)
         else:
-            self.file_name["state"] = "readonly"
+            self.file_name["state"] = DISABLED
+            self.file_name.pack_forget()
 
     def save_game(self):
         exit_code, info = game.save_game(
